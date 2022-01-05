@@ -9,41 +9,6 @@ props:
       name: item
       required: true
       type: TEXT
-    - default: "120"
-      description: The width of the switch in pixels (<code>px</code>)
-      label: Width
-      name: cardwidth
-      required: false
-      type: INTEGER
-      advanced: true
-    - default: "120"
-      description: The height of the switch in pixels (<code>px</code>)
-      label: Height
-      name: cardheight
-      required: false
-      type: INTEGER
-      advanced: true
-    - default: white
-      description: The color of the text as <a class="external text-color-blue" target="_blank" href="https://www.w3schools.com/cssref/css_colors.asp">CSS Color</a>
-      label: Text Color
-      name: textcolor
-      required: false
-      type: TEXT
-      advanced: true
-    - default: "14"
-      description: The size of the text in pixels (<code>px</code>)
-      label: Text Size
-      name: textsize
-      required: false
-      type: INTEGER
-      advanced: true
-    - default: "65"
-      description: The size of the icon in pixels (<code>px</code>)
-      label: Icon Size
-      name: iconsize
-      required: false
-      type: INTEGER
-      advanced: true
     - description: The label of the untoggled button
       label: Text
       name: text1
@@ -102,12 +67,54 @@ props:
       type: TEXT
       groupName: toggled
       advanced: true
+    - default: "120"
+      description: The width of the switch in pixels (<code>px</code>)
+      label: Width
+      name: cardwidth
+      required: false
+      type: INTEGER
+      advanced: true
+      groupName: styling
+    - default: "120"
+      description: The height of the switch in pixels (<code>px</code>)
+      label: Height
+      name: cardheight
+      required: false
+      type: INTEGER
+      advanced: true
+      groupName: styling
+    - default: white
+      description: The color of the text as <a class="external text-color-blue" target="_blank" href="https://www.w3schools.com/cssref/css_colors.asp">CSS Color</a>
+      label: Text Color
+      name: textcolor
+      required: false
+      type: TEXT
+      advanced: true
+      groupName: styling
+    - default: "14"
+      description: The size of the text in pixels (<code>px</code>)
+      label: Text Size
+      name: textsize
+      required: false
+      type: INTEGER
+      advanced: true
+      groupName: styling
+    - default: "65"
+      description: The size of the icon in pixels (<code>px</code>)
+      label: Icon Size
+      name: iconsize
+      required: false
+      type: INTEGER
+      advanced: true
+      groupName: styling
   parameterGroups:
     - name: untoggled
       label: Untoggled (OFF)
     - name: toggled
       label: Toggled (ON)
-timestamp: Jan 5, 2022, 3:11:28 PM
+    - name: styling
+      label: Styling
+timestamp: Jan 5, 2022, 3:18:07 PM
 component: f7-card
 config:
   style:
