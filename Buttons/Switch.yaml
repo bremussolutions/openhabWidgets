@@ -8,6 +8,31 @@ props:
       name: item
       required: true
       type: TEXT
+    - label: Width
+      name: cardwidth
+      required: false
+      type: TEXT
+      advanced: true
+    - label: Height
+      name: cardheight
+      required: false
+      type: TEXT
+      advanced: true
+    - label: Text Color
+      name: textcolor
+      required: false
+      type: TEXT
+      advanced: true
+    - label: Text Size
+      name: textsize
+      required: false
+      type: TEXT
+      advanced: true
+    - label: Icon Size
+      name: iconsize
+      required: false
+      type: TEXT
+      advanced: true
     - description: Label of the untoggled button
       label: Text
       name: text1
@@ -26,6 +51,12 @@ props:
       type: TEXT
       groupName: untoggled
       advanced: true
+    - label: Icon Color
+      name: iconcolor1
+      required: false
+      type: TEXT
+      groupName: untoggled
+      advanced: true
     - description: Label of the toggled button
       label: Text
       name: text2
@@ -40,6 +71,12 @@ props:
     - description: "Color of the control (supported values: red, green, blue, pink, yellow, orange, purple, deeppurple, lightblue, teal, lime, deeporange, gray, white, black)"
       label: Background
       name: background2
+      required: false
+      type: TEXT
+      groupName: toggled
+      advanced: true
+    - label: Icon Color
+      name: iconcolor2
       required: false
       type: TEXT
       groupName: toggled
@@ -75,9 +112,9 @@ slots:
           - component: Label
             config:
               style:
-                color: '=(props.headlinecolor) ? props.headlinecolor : "white"'
-                font-size: '=(props.headlinesize) ? props.headlinesize: "13px"'
-                font-weight: '=(props.headlineweight) ? props.headlineweight : "normal"'
+                color: '=(props.textcolor) ? props.textcolor : "white"'
+                font-size: '=(props.textsize) ? props.textsize: "1em"'
+                font-weight: "normal"
                 padding: 3px
               text: '=(items[props.item].state === "OFF") ? ((props.text1) ? props.text1 : items[props.item].state) : ((props.text2) ? props.text2 : items[props.item].state)'
           - component: f7-icon
@@ -85,7 +122,7 @@ slots:
               f7: '=(items[props.item].state === "OFF") ? (props.icon1 ? props.icon1 : "lightbulb_fill") : (props.icon2 ? props.icon2 : "lightbulb")'
               size: '=props.iconsize ? props.iconsize: "65px"'
               style:
-                color: '=(items[props.item].state === props.command2) ? (props.iconcolor2 ? props.iconcolor2 : "rgba(255,234,5,1)") : (props.iconcolor1 ? props.iconcolor1 : "")'
+                color: '=(items[props.item].state === "OFF") ? (props.iconcolor1 ? props.iconcolor1 : "white") : (props.iconcolor2 ? props.iconcolor2 : "white")'
                 padding: 3px
     - component: oh-link
       config:
