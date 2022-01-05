@@ -1,0 +1,101 @@
+uid: Switch
+tags:
+  - Switch
+props:
+  parameters:
+    - context: item
+      label: Item
+      name: item
+      required: true
+      type: TEXT
+    - description: Label of the untoggled button
+      label: Text
+      name: text1
+      required: false
+      type: TEXT
+      groupName: untoggled
+    - label: Icon
+      name: icon1
+      required: false
+      type: TEXT
+      groupName: untoggled
+    - description: "Color of the control (supported values: red, green, blue, pink, yellow, orange, purple, deeppurple, lightblue, teal, lime, deeporange, gray, white, black)"
+      label: Background
+      name: background1
+      required: false
+      type: TEXT
+      groupName: untoggled
+      advanced: true
+    - description: Label of the toggled button
+      label: Text
+      name: text2
+      required: false
+      type: TEXT
+      groupName: toggled
+    - label: Icon
+      name: icon2
+      required: false
+      type: TEXT
+      groupName: toggled
+    - description: "Color of the control (supported values: red, green, blue, pink, yellow, orange, purple, deeppurple, lightblue, teal, lime, deeporange, gray, white, black)"
+      label: Background
+      name: background2
+      required: false
+      type: TEXT
+      groupName: toggled
+      advanced: true
+  parameterGroups:
+    - name: untoggled
+      label: Untoggled (OFF)
+    - name: toggled
+      label: Toggled (ON)
+timestamp: Jan 5, 2022, 11:43:00 AM
+component: f7-card
+config:
+  style:
+    background: '=(items[props.item].state === "OFF") ? (props.background1 ? props.background1 : "gray") : (props.background2 ? props.background2 : "linear-gradient(180deg, rgba(255,149,0,1) 0%, rgba(157,92,0,1) 100%)")'
+    height: '=props.cardheight ? props.cardheight : "8.5em"'
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0px
+    width: '=props.cardwidth ? props.cardwidth : "8.5em"'
+slots:
+  default:
+    - component: f7-block
+      config:
+        style:
+          align-items: center
+          display: grid
+          grid-template-rows: 1fr auto auto 1fr
+          height: 100%
+          justify-items: center
+      slots:
+        default:
+          - component: Label
+          - component: Label
+            config:
+              style:
+                color: '=(props.headlinecolor) ? props.headlinecolor : "white"'
+                font-size: '=(props.headlinesize) ? props.headlinesize: "13px"'
+                font-weight: '=(props.headlineweight) ? props.headlineweight : "normal"'
+                padding: 3px
+              text: '=(items[props.item].state === "OFF") ? ((props.text1) ? props.text1 : items[props.item].state) : ((props.text2) ? props.text2 : items[props.item].state)'
+          - component: f7-icon
+            config:
+              f7: '=(items[props.item].state === "OFF") ? (props.icon1 ? props.icon1 : "lightbulb_fill") : (props.icon2 ? props.icon2 : "lightbulb")'
+              size: '=props.iconsize ? props.iconsize: "65px"'
+              style:
+                color: '=(items[props.item].state === props.command2) ? (props.iconcolor2 ? props.iconcolor2 : "rgba(255,234,5,1)") : (props.iconcolor1 ? props.iconcolor1 : "")'
+                padding: 3px
+    - component: oh-link
+      config:
+        action: command
+        actionCommand: '=(items[props.item].state === "OFF") ? "ON" : "OFF"'
+        actionItem: =props.item
+        style:
+          actionPosition: center
+          height: 100%
+          left: 0
+          position: absolute
+          top: 0
+          width: 100%
