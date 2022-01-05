@@ -4,61 +4,126 @@ tags:
 props:
   parameters:
     - context: item
+      description: The item to control
       label: Item
       name: item
       required: true
       type: TEXT
-    - description: Label of the untoggled button
+    - description: The label of the untoggled button
       label: Text
       name: text1
       required: false
       type: TEXT
       groupName: untoggled
-    - label: Icon
+    - default: lightbulb
+      description: The <a class="external text-color-blue" target="_blank" href="https://framework7.io/icons/">Framework7 icon</a> of the untoggled button
+      label: Icon
       name: icon1
-      required: false
+      required: true
       type: TEXT
       groupName: untoggled
-    - description: "Color of the control (supported values: red, green, blue, pink, yellow, orange, purple, deeppurple, lightblue, teal, lime, deeporange, gray, white, black)"
+    - default: gray
+      description: The background of the untoggled button as <a class="external text-color-blue" target="_blank" href="https://www.w3schools.com/cssref/css_colors.asp">CSS Color</a>
       label: Background
       name: background1
       required: false
       type: TEXT
       groupName: untoggled
       advanced: true
-    - description: Label of the toggled button
+    - default: white
+      description: The color of the untoogled icon as <a class="external text-color-blue" target="_blank" href="https://www.w3schools.com/cssref/css_colors.asp">CSS Color</a>
+      label: Icon Color
+      name: iconcolor1
+      required: false
+      type: TEXT
+      groupName: untoggled
+      advanced: true
+    - description: The label of the toggled button
       label: Text
       name: text2
       required: false
       type: TEXT
       groupName: toggled
-    - label: Icon
+    - default: lightbulb_fill
+      description: The <a class="external text-color-blue" target="_blank" href="https://framework7.io/icons/">Framework7 icon</a> of the toggled button
+      label: Icon
       name: icon2
-      required: false
+      required: true
       type: TEXT
       groupName: toggled
-    - description: "Color of the control (supported values: red, green, blue, pink, yellow, orange, purple, deeppurple, lightblue, teal, lime, deeporange, gray, white, black)"
+    - default: linear-gradient(180deg, rgba(255,149,0,1) 0%, rgba(157,92,0,1) 100%)
+      description: The background of the untoggled button as <a class="external text-color-blue" target="_blank" href="https://www.w3schools.com/cssref/css_colors.asp">CSS Color</a>
       label: Background
       name: background2
       required: false
       type: TEXT
       groupName: toggled
       advanced: true
+    - default: white
+      description: The color of the untoogled icon as <a class="external text-color-blue" target="_blank" href="https://www.w3schools.com/cssref/css_colors.asp">CSS Color</a>
+      label: Icon Color
+      name: iconcolor2
+      required: false
+      type: TEXT
+      groupName: toggled
+      advanced: true
+    - default: "120"
+      description: The width of the switch in pixels (<code>px</code>)
+      label: Width
+      name: cardwidth
+      required: false
+      type: INTEGER
+      advanced: true
+      groupName: styling
+    - default: "120"
+      description: The height of the switch in pixels (<code>px</code>)
+      label: Height
+      name: cardheight
+      required: false
+      type: INTEGER
+      advanced: true
+      groupName: styling
+    - default: white
+      description: The color of the text as <a class="external text-color-blue" target="_blank" href="https://www.w3schools.com/cssref/css_colors.asp">CSS Color</a>
+      label: Text Color
+      name: textcolor
+      required: false
+      type: TEXT
+      advanced: true
+      groupName: styling
+    - default: "14"
+      description: The size of the text in pixels (<code>px</code>)
+      label: Text Size
+      name: textsize
+      required: false
+      type: INTEGER
+      advanced: true
+      groupName: styling
+    - default: "65"
+      description: The size of the icon in pixels (<code>px</code>)
+      label: Icon Size
+      name: iconsize
+      required: false
+      type: INTEGER
+      advanced: true
+      groupName: styling
   parameterGroups:
     - name: untoggled
       label: Untoggled (OFF)
     - name: toggled
       label: Toggled (ON)
-timestamp: Jan 5, 2022, 11:43:00 AM
+    - name: styling
+      label: Styling
+timestamp: Jan 5, 2022, 3:18:07 PM
 component: f7-card
 config:
   style:
-    background: '=(items[props.item].state === "OFF") ? (props.background1 ? props.background1 : "gray") : (props.background2 ? props.background2 : "linear-gradient(180deg, rgba(255,149,0,1) 0%, rgba(157,92,0,1) 100%)")'
-    height: '=props.cardheight ? props.cardheight : "8.5em"'
+    background: '=(items[props.item].state === "OFF") ? props.background1 : props.background2'
+    height: =props.cardheight + "px"
     margin-left: auto;
     margin-right: auto;
     padding: 0px
-    width: '=props.cardwidth ? props.cardwidth : "8.5em"'
+    width: =props.cardwidth + "px"
 slots:
   default:
     - component: f7-block
@@ -75,17 +140,17 @@ slots:
           - component: Label
             config:
               style:
-                color: '=(props.headlinecolor) ? props.headlinecolor : "white"'
-                font-size: '=(props.headlinesize) ? props.headlinesize: "13px"'
-                font-weight: '=(props.headlineweight) ? props.headlineweight : "normal"'
+                color: =props.textcolor
+                font-size: =props.textsize + "px"
+                font-weight: normal
                 padding: 3px
               text: '=(items[props.item].state === "OFF") ? ((props.text1) ? props.text1 : items[props.item].state) : ((props.text2) ? props.text2 : items[props.item].state)'
           - component: f7-icon
             config:
-              f7: '=(items[props.item].state === "OFF") ? (props.icon1 ? props.icon1 : "lightbulb_fill") : (props.icon2 ? props.icon2 : "lightbulb")'
-              size: '=props.iconsize ? props.iconsize: "65px"'
+              f7: '=(items[props.item].state === "OFF") ? props.icon1 : props.icon2'
+              size: =props.iconsize
               style:
-                color: '=(items[props.item].state === props.command2) ? (props.iconcolor2 ? props.iconcolor2 : "rgba(255,234,5,1)") : (props.iconcolor1 ? props.iconcolor1 : "")'
+                color: '=(items[props.item].state === "OFF") ? (props.iconcolor1 ? props.iconcolor1 : "white") : (props.iconcolor2 ? props.iconcolor2 : "white")'
                 padding: 3px
     - component: oh-link
       config:

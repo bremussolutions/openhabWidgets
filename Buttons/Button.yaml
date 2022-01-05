@@ -1,0 +1,136 @@
+uid: Button
+tags:
+  - Button
+props:
+  parameters:
+    - context: item
+      description: The item to control
+      label: Item
+      name: item
+      required: true
+      type: TEXT
+    - description: The command to send to item (e.g. <code>ON</code>, <code>OFF</code>)
+      label: Command
+      name: command
+      required: true
+      type: TEXT
+    - description: The label of the button
+      label: Text
+      name: text
+      required: false
+      type: TEXT
+    - default: lightbulb
+      description: The <a class="external text-color-blue" target="_blank" href="https://framework7.io/icons/">Framework7 icon</a> of the button
+      label: Icon
+      name: icon
+      required: true
+      type: TEXT
+    - default: "120"
+      description: The width of the button in pixels (<code>px</code>)
+      label: Width
+      name: cardwidth
+      required: false
+      type: INTEGER
+      groupName: styling
+      advanced: true
+    - default: "120"
+      description: The height of the button in pixels (<code>px</code>)
+      label: Height
+      name: cardheight
+      required: false
+      type: INTEGER
+      groupName: styling
+      advanced: true
+    - default: gray
+      description: The background of the button as <a class="external text-color-blue" target="_blank" href="https://www.w3schools.com/cssref/css_colors.asp">CSS Color</a>
+      label: Background
+      name: background
+      required: false
+      type: TEXT
+      groupName: styling
+      advanced: true
+    - default: white
+      description: The color of the text as <a class="external text-color-blue" target="_blank" href="https://www.w3schools.com/cssref/css_colors.asp">CSS Color</a>
+      label: Text Color
+      name: textcolor
+      required: false
+      type: TEXT
+      groupName: styling
+      advanced: true
+    - default: "14"
+      description: The size of the text in pixels (<code>px</code>)
+      label: Text Size
+      name: textsize
+      required: false
+      type: INTEGER
+      groupName: styling
+      advanced: true
+    - default: white
+      description: The color of the icon as <a class="external text-color-blue" target="_blank" href="https://www.w3schools.com/cssref/css_colors.asp">CSS Color</a>
+      label: Icon Color
+      name: iconcolor
+      required: false
+      type: TEXT
+      groupName: styling
+      advanced: true
+    - default: "65"
+      description: The size of the icon in pixels (<code>px</code>)
+      label: Icon Size
+      name: iconsize
+      required: false
+      type: INTEGER
+      groupName: styling
+      advanced: true
+  parameterGroups:
+    - name: styling
+      label: Styling
+timestamp: Jan 5, 2022, 3:30:47 PM
+component: f7-card
+config:
+  style:
+    background: =props.background
+    height: =props.cardheight + "px"
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0px
+    width: =props.cardwidth + "px"
+slots:
+  default:
+    - component: f7-block
+      config:
+        style:
+          align-items: center
+          display: grid
+          grid-template-rows: 1fr auto auto 1fr
+          height: 100%
+          justify-items: center
+      slots:
+        default:
+          - component: Label
+          - component: Label
+            config:
+              style:
+                color: =props.textcolor
+                font-size: =props.textsize + "px"
+                font-weight: normal
+                padding: 3px
+              text: =props.text
+          - component: f7-icon
+            config:
+              f7: =props.icon
+              size: =props.iconsize
+              style:
+                color: =props.iconcolor
+                padding: 3px
+    - component: oh-link
+      config:
+        action: command
+        actionCommand: =props.command
+        actionItem: =props.item
+        style:
+          actionPosition: center
+          height: 100%
+          left: 0
+          position: absolute
+          top: 0
+          width: 100%

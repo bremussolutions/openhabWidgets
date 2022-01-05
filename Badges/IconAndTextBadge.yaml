@@ -1,0 +1,117 @@
+uid: Badge
+tags:
+  - Badge
+props:
+  parameters:
+    - context: item
+      description: The item to be linked to the badge
+      label: Item
+      name: item
+      required: true
+      type: TEXT
+    - description: The openHAB state for <b>Status 1</b> (e.g. ON, OFF, OPEN, CLOSED)
+      label: State
+      name: state1
+      required: true
+      type: TEXT
+      groupName: item1
+    - description: The text to display if <b>Status 1</b> is active
+      label: Text
+      name: text1
+      required: false
+      type: TEXT
+      groupName: item1
+    - description: The <a class="external text-color-blue" target="_blank" href="https://framework7.io/icons/">Framework7 icon</a> of the badge if <b>Status 1</b> is active
+      label: Icon
+      name: icon1
+      required: false
+      type: TEXT
+      groupName: item1
+      default: "power"
+    - description: The background of the badge if <b>Status 1</b> is active (as <a class="external text-color-blue" target="_blank" href="https://www.w3schools.com/cssref/css_colors.asp">CSS Color</a>)
+      label: Hintergrund
+      name: background1
+      required: false
+      type: TEXT
+      groupName: item1
+      advanced: true
+    - description: The openHAB state for <b>Status 2</b> (e.g. ON, OFF, OPEN, CLOSED)
+      label: State
+      name: state2
+      required: true
+      type: TEXT
+      groupName: item2
+    - description: The text to display if <b>Status 2</b> is active
+      label: Text
+      name: text2
+      required: false
+      type: TEXT
+      groupName: item2
+    - description: The <a class="external text-color-blue" target="_blank" href="https://framework7.io/icons/">Framework7 icon</a> of the badge if <b>Status 2</b> is active
+      label: Icon
+      name: icon2
+      required: false
+      type: TEXT
+      groupName: item2
+      default: "power"
+    - description: The background of the badge if <b>Status 2</b> is active (as <a class="external text-color-blue" target="_blank" href="https://www.w3schools.com/cssref/css_colors.asp">CSS Color</a>)
+      label: Hintergrund
+      name: background2
+      required: false
+      type: TEXT
+      groupName: item2
+      advanced: true
+    - description: The width of the switch in pixels (<code>px</code>)
+      label: Width
+      name: cardwidth
+      required: false
+      type: INTEGER
+      advanced: true
+      groupName: styling
+    - description: The height of the switch in pixels (<code>px</code>)
+      label: Height
+      name: cardheight
+      required: false
+      type: INTEGER
+      advanced: true
+      groupName: styling
+  parameterGroups:
+    - name: item1
+      label: Status 1
+    - name: item2
+      label: Status 2
+    - name: styling
+      label: Styling
+timestamp: Jan 4, 2022, 7:56:12 PM
+component: f7-card
+config:
+  style:
+    width: '=props.cardwidth ? props.cardwidth + "px" : ""'
+    height: '=props.cardheight ? props.cardheight + "px" : ""'
+    margin-left: auto;
+    margin-right: auto;
+    background: '=(items[props.item].state === props.state1) ? (props.background1 ? props.background1 : "radial-gradient(circle, rgba(0,255,59,1) 73%, rgba(20,201,19,1) 100%)") : (props.background2 ? props.background2 : "radial-gradient(circle, rgba(255,0,0,1) 73%, rgba(201,19,19,1) 100%)")'
+slots:
+  default:
+    - component: f7-block
+      config:
+        style:
+          align-items: center
+          display: grid
+          grid-template-columns: 100px auto
+          justify-items: center
+          padding: 15px
+      slots:
+        default:
+          - component: f7-icon
+            config:
+              f7: "=(items[props.item].state === props.state1) ? props.icon1 : props.icon2"
+              size: 50px
+              style:
+                text-shadow: "1px 1px 3px #333"
+          - component: Label
+            config:
+              style:
+                font-size: 2em
+                text-shadow: "1px 1px 3px #333"
+              text: "=(items[props.item].state === props.state1) ? (props.text1 ? props.text1 : props.state1) : (props.text2 ? props.text2 : props.state2)"
