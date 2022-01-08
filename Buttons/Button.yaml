@@ -25,8 +25,7 @@ props:
       name: icon
       required: true
       type: TEXT
-    - default: "120"
-      description: The width of the button in pixels (<code>px</code>)
+    - description: The width of the button in pixels (<code>px</code>)
       label: Width
       name: cardwidth
       required: false
@@ -84,7 +83,7 @@ props:
   parameterGroups:
     - name: styling
       label: Styling
-timestamp: Jan 5, 2022, 3:30:47 PM
+timestamp: Jan 8, 2022, 8:11:54 PM
 component: f7-card
 config:
   style:
@@ -93,7 +92,7 @@ config:
     margin-left: auto;
     margin-right: auto;
     padding: 0px
-    width: =props.cardwidth + "px"
+    width: '=(props.cardwidth) ? props.cardwidth + "px" : ""'
 slots:
   default:
     - component: f7-block

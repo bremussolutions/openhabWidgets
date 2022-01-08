@@ -67,46 +67,45 @@ props:
       type: TEXT
       groupName: toggled
       advanced: true
-    - default: "120"
-      description: The width of the switch in pixels (<code>px</code>)
+    - description: The width of the switch in pixels (<code>px</code>)
       label: Width
       name: cardwidth
       required: false
       type: INTEGER
-      advanced: true
       groupName: styling
+      advanced: true
     - default: "120"
       description: The height of the switch in pixels (<code>px</code>)
       label: Height
       name: cardheight
       required: false
       type: INTEGER
-      advanced: true
       groupName: styling
+      advanced: true
     - default: white
       description: The color of the text as <a class="external text-color-blue" target="_blank" href="https://www.w3schools.com/cssref/css_colors.asp">CSS Color</a>
       label: Text Color
       name: textcolor
       required: false
       type: TEXT
-      advanced: true
       groupName: styling
+      advanced: true
     - default: "14"
       description: The size of the text in pixels (<code>px</code>)
       label: Text Size
       name: textsize
       required: false
       type: INTEGER
-      advanced: true
       groupName: styling
+      advanced: true
     - default: "65"
       description: The size of the icon in pixels (<code>px</code>)
       label: Icon Size
       name: iconsize
       required: false
       type: INTEGER
-      advanced: true
       groupName: styling
+      advanced: true
   parameterGroups:
     - name: untoggled
       label: Untoggled (OFF)
@@ -114,7 +113,7 @@ props:
       label: Toggled (ON)
     - name: styling
       label: Styling
-timestamp: Jan 5, 2022, 3:18:07 PM
+timestamp: Jan 8, 2022, 8:13:12 PM
 component: f7-card
 config:
   style:
@@ -123,7 +122,7 @@ config:
     margin-left: auto;
     margin-right: auto;
     padding: 0px
-    width: =props.cardwidth + "px"
+    width: '=(props.cardwidth) ? props.cardwidth + "px" : ""'
 slots:
   default:
     - component: f7-block
