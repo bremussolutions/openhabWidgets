@@ -15,11 +15,10 @@ props:
       required: false
       type: TEXT
       groupName: untoggled
-    - default: lightbulb
-      description: The <a class="external text-color-blue" target="_blank" href="https://framework7.io/icons/">Framework7 icon</a> of the untoggled button
+    - description: Use <code>oh:iconName</code> (<a class="external text-color-blue" target="_blank" href="https://www.openhab.org/link/icons">openHAB icon</a>), <code>f7:iconName</code> (<a class="external text-color-blue" target="_blank" href="https://framework7.io/icons/">Framework7 icon</a>), <code>material:iconName</code> (<a class="external text-color-blue" target="_blank" href="https://jossef.github.io/material-design-icons-iconfont/">Material icon</a>) or <code>iconify:iconSet:iconName</code> (<a class="external text-color-blue" target="_blank" href="https://icon-sets.iconify.design">Iconify icon</a>, requires being online if not in cache)
       label: Icon
       name: icon1
-      required: true
+      required: false
       type: TEXT
       groupName: untoggled
     - default: gray
@@ -44,11 +43,10 @@ props:
       required: false
       type: TEXT
       groupName: toggled
-    - default: lightbulb_fill
-      description: The <a class="external text-color-blue" target="_blank" href="https://framework7.io/icons/">Framework7 icon</a> of the toggled button
+    - description: Use <code>oh:iconName</code> (<a class="external text-color-blue" target="_blank" href="https://www.openhab.org/link/icons">openHAB icon</a>), <code>f7:iconName</code> (<a class="external text-color-blue" target="_blank" href="https://framework7.io/icons/">Framework7 icon</a>), <code>material:iconName</code> (<a class="external text-color-blue" target="_blank" href="https://jossef.github.io/material-design-icons-iconfont/">Material icon</a>) or <code>iconify:iconSet:iconName</code> (<a class="external text-color-blue" target="_blank" href="https://icon-sets.iconify.design">Iconify icon</a>, requires being online if not in cache)
       label: Icon
       name: icon2
-      required: true
+      required: false
       type: TEXT
       groupName: toggled
     - default: linear-gradient(180deg, rgba(255,149,0,1) 0%, rgba(157,92,0,1) 100%)
@@ -113,7 +111,7 @@ props:
       label: Toggled (ON)
     - name: styling
       label: Styling
-timestamp: Jan 8, 2022, 8:13:12 PM
+timestamp: Jan 8, 2022, 9:22:33 PM
 component: f7-card
 config:
   style:
@@ -144,10 +142,10 @@ slots:
                 font-weight: normal
                 padding: 3px
               text: '=(items[props.item].state === "OFF") ? ((props.text1) ? props.text1 : items[props.item].state) : ((props.text2) ? props.text2 : items[props.item].state)'
-          - component: f7-icon
+          - component: oh-icon
             config:
-              f7: '=(items[props.item].state === "OFF") ? props.icon1 : props.icon2'
-              size: =props.iconsize
+              icon: '=(items[props.item].state === "OFF") ? (props.icon1 ? props.icon1 : "f7:power") : (props.icon2 ? props.icon2 : "f7:power")'
+              width: =props.iconsize
               style:
                 color: '=(items[props.item].state === "OFF") ? (props.iconcolor1 ? props.iconcolor1 : "white") : (props.iconcolor2 ? props.iconcolor2 : "white")'
                 padding: 3px
