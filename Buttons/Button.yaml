@@ -82,7 +82,7 @@ props:
   parameterGroups:
     - name: styling
       label: Styling
-timestamp: Jan 8, 2022, 9:27:47 PM
+timestamp: Jan 8, 2022, 10:07:06 PM
 component: f7-card
 config:
   style:
@@ -115,11 +115,12 @@ slots:
               text: =props.text
           - component: oh-icon
             config:
-              icon: '=(props.icon) ? props.icon : "f7:power"'
+              icon: =props.icon
               width: =props.iconsize
               style:
                 color: =props.iconcolor
                 padding: 3px
+                display: '=(props.icon) ? "block" : "none"'
     - component: oh-link
       config:
         action: command
