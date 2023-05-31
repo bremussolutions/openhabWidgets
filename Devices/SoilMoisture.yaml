@@ -1,0 +1,358 @@
+uid: SoilMoisture
+tags:
+  - Devices
+props:
+  parameters:
+    - description: An item to control
+      label: Name
+      name: widgetname
+      required: false
+      type: TEXT
+    - description: The height of the chart in pixels (<code>px</code>)
+      label: Diagrammhöhe
+      name: chartheight
+      required: false
+      type: INTEGER
+      advanced: true
+    - context: item
+      description: An item to control
+      label: Bodenfeuchte 1
+      name: soilmoisture1
+      required: false
+      type: TEXT
+      groupName: group_sensors
+    - description: An item to control
+      label: Name
+      name: soilmoisturename1
+      required: false
+      type: TEXT
+      groupName: group_sensors
+    - default: "#E74C3C"
+      description: An item to control
+      label: Farbe
+      name: soilmoisturecolor1
+      required: false
+      type: TEXT
+      groupName: group_sensors
+      advanced: true
+    - context: item
+      description: An item to control
+      label: Bodenfeuchte 2
+      name: soilmoisture2
+      required: false
+      type: TEXT
+      groupName: group_sensors
+    - description: An item to control
+      label: Name
+      name: soilmoisturename2
+      required: false
+      type: TEXT
+      groupName: group_sensors
+    - default: "#8E44AD"
+      description: An item to control
+      label: Farbe
+      name: soilmoisturecolor2
+      required: false
+      type: TEXT
+      groupName: group_sensors
+      advanced: true
+    - context: item
+      description: An item to control
+      label: Bodenfeuchte 3
+      name: soilmoisture3
+      required: false
+      type: TEXT
+      groupName: group_sensors
+    - description: An item to control
+      label: Name
+      name: soilmoisturename3
+      required: false
+      type: TEXT
+      groupName: group_sensors
+    - default: "#3498DB"
+      description: An item to control
+      label: Farbe
+      name: soilmoisturecolor3
+      required: false
+      type: TEXT
+      groupName: group_sensors
+      advanced: true
+    - context: item
+      description: An item to control
+      label: Bodenfeuchte 4
+      name: soilmoisture4
+      required: false
+      type: TEXT
+      groupName: group_sensors
+    - description: An item to control
+      label: Name
+      name: soilmoisturename4
+      required: false
+      type: TEXT
+      groupName: group_sensors
+    - default: "#2ECC71"
+      description: An item to control
+      label: Farbe
+      name: soilmoisturecolor4
+      required: false
+      type: TEXT
+      groupName: group_sensors
+      advanced: true
+    - context: item
+      description: An item to control
+      label: Luftfeuchte
+      name: humidity
+      required: false
+      type: TEXT
+      groupName: group_humidity
+    - description: An item to control
+      label: Name
+      name: humidityname
+      required: false
+      type: TEXT
+      groupName: group_humidity
+    - context: item
+      description: An item to control
+      label: Batteriestand
+      name: batterylevel
+      required: false
+      type: TEXT
+      groupName: group_device
+    - context: item
+      description: An item to control
+      label: Letzte Messung
+      name: lastmeasurement
+      required: false
+      type: TEXT
+      groupName: group_device
+  parameterGroups:
+    - name: group_sensors
+      label: Sensoren
+    - name: group_humidity
+      label: Luftfeuchte
+    - name: group_device
+      label: Messgerät
+timestamp: Apr 23, 2023, 3:09:54 PM
+component: f7-card
+config:
+  class:
+    - padding-bottom
+  title: '=props.widgetname ? props.widgetname : "Soil Moisture"'
+slots:
+  default:
+    - component: f7-row
+      config:
+        class:
+          - align-items-center
+      slots:
+        default:
+          - component: f7-col
+            config:
+              small: 25
+              width: 100
+            slots:
+              default:
+                - component: oh-gauge
+                  config:
+                    borderBgColor: gray
+                    borderColor: =props.soilmoisturecolor1
+                    borderWidth: 25
+                    class:
+                      - margin-left
+                      - margin-right
+                      - margin-top
+                      - margin-bottom
+                    item: =props.soilmoisture1
+                    labelText: '=props.soilmoisturename1 ? props.soilmoisturename1 : "Sensor 1"'
+                    type: semicircle
+                    valueTextColor: white
+          - component: f7-col
+            config:
+              small: 25
+              width: 100
+            slots:
+              default:
+                - component: oh-gauge
+                  config:
+                    borderBgColor: gray
+                    borderColor: =props.soilmoisturecolor2
+                    borderWidth: 25
+                    class:
+                      - margin-left
+                      - margin-right
+                      - margin-top
+                      - margin-bottom
+                    item: =props.soilmoisture2
+                    labelText: '=props.soilmoisturename2 ? props.soilmoisturename2 : "Sensor 2"'
+                    type: semicircle
+                    valueTextColor: white
+          - component: f7-col
+            config:
+              small: 25
+              width: 100
+            slots:
+              default:
+                - component: oh-gauge
+                  config:
+                    borderBgColor: gray
+                    borderColor: =props.soilmoisturecolor3
+                    borderWidth: 25
+                    class:
+                      - margin-left
+                      - margin-right
+                      - margin-top
+                      - margin-bottom
+                    item: =props.soilmoisture3
+                    labelText: '=props.soilmoisturename3 ? props.soilmoisturename3 : "Sensor 3"'
+                    type: semicircle
+                    valueTextColor: white
+          - component: f7-col
+            config:
+              small: 25
+              width: 100
+            slots:
+              default:
+                - component: oh-gauge
+                  config:
+                    borderBgColor: gray
+                    borderColor: =props.soilmoisturecolor4
+                    borderWidth: 25
+                    class:
+                      - margin-left
+                      - margin-right
+                      - margin-top
+                      - margin-bottom
+                    item: =props.soilmoisture4
+                    labelText: '=props.soilmoisturename4 ? props.soilmoisturename4 : "Sensor 4"'
+                    type: semicircle
+                    valueTextColor: white
+    - component: f7-row
+      config:
+        class:
+          - margin-top
+      slots:
+        default:
+          - component: f7-col
+            config:
+              class:
+                - margin-left
+                - margin-right
+            slots:
+              default:
+                - component: oh-chart
+                  config:
+                    chartType: ""
+                    height: '=props.chartheight ? props.chartheight + "px" : ""'
+                    label: Feuchtigkeit
+                    period: D
+                  slots:
+                    dataZoom:
+                      - component: oh-chart-datazoom
+                        config:
+                          type: inside
+                    grid:
+                      - component: oh-chart-grid
+                        config:
+                          containLabel: false
+                    legend:
+                      - component: oh-chart-legend
+                        config:
+                          bottom: 3
+                          type: scroll
+                    series:
+                      - component: oh-time-series
+                        config:
+                          color: =props.soilmoisturecolor1
+                          gridIndex: 0
+                          item: =props.soilmoisture1
+                          name: =props.soilmoisturename1
+                          type: line
+                          xAxisIndex: 0
+                          yAxisIndex: 0
+                      - component: oh-time-series
+                        config:
+                          color: =props.soilmoisturecolor2
+                          gridIndex: 0
+                          item: =props.soilmoisture2
+                          name: =props.soilmoisturename2
+                          type: line
+                          xAxisIndex: 0
+                          yAxisIndex: 0
+                      - component: oh-time-series
+                        config:
+                          color: =props.soilmoisturecolor3
+                          gridIndex: 0
+                          item: =props.soilmoisture3
+                          name: =props.soilmoisturename3
+                          type: line
+                          xAxisIndex: 0
+                          yAxisIndex: 0
+                      - component: oh-time-series
+                        config:
+                          color: =props.soilmoisturecolor4
+                          gridIndex: 0
+                          item: =props.soilmoisture4
+                          name: =props.soilmoisturename4
+                          type: line
+                          xAxisIndex: 0
+                          yAxisIndex: 0
+                      - component: oh-time-series
+                        config:
+                          color: "#3498DB"
+                          gridIndex: 0
+                          item: =props.humidity
+                          name: =props.humidityname
+                          type: line
+                          xAxisIndex: 0
+                          yAxisIndex: 0
+                    tooltip:
+                      - component: oh-chart-tooltip
+                        config:
+                          confine: true
+                          smartFormatter: true
+                    xAxis:
+                      - component: oh-time-axis
+                        config:
+                          gridIndex: 0
+                    yAxis:
+                      - component: oh-value-axis
+                        config:
+                          gridIndex: 0
+                          min: 0
+                          name: "%"
+    - component: f7-row
+      slots:
+        default:
+          - component: f7-col
+            config:
+              class:
+                - '=props.lastmeasurement ? "display-block" : "display-none"'
+              medium: 50
+              width: 100
+            slots:
+              default:
+                - component: oh-label-card
+                  config:
+                    icon: time
+                    item: =props.lastmeasurement
+                    title: Letzte Messung
+          - component: f7-col
+            config:
+              class:
+                - '=props.batterylevel ? "display-block" : "display-none"'
+              medium: 50
+              width: 100
+            slots:
+              default:
+                - component: oh-grid-col
+                  config: {}
+                  slots:
+                    default:
+                      - component: oh-label-card
+                        config:
+                          action: analyzer
+                          actionAnalyzerItems:
+                            - =props.batterylevel
+                          icon: batterylevel
+                          item: =props.batterylevel
+                          title: Batterie
