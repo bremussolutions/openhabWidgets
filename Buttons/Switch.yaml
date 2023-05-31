@@ -15,11 +15,10 @@ props:
       required: false
       type: TEXT
       groupName: untoggled
-    - default: lightbulb
-      description: The <a class="external text-color-blue" target="_blank" href="https://framework7.io/icons/">Framework7 icon</a> of the untoggled button
+    - description: Use <code>oh:iconName</code> (<a class="external text-color-blue" target="_blank" href="https://www.openhab.org/link/icons">openHAB icon</a>), <code>f7:iconName</code> (<a class="external text-color-blue" target="_blank" href="https://framework7.io/icons/">Framework7 icon</a>), <code>material:iconName</code> (<a class="external text-color-blue" target="_blank" href="https://jossef.github.io/material-design-icons-iconfont/">Material icon</a>) or <code>iconify:iconSet:iconName</code> (<a class="external text-color-blue" target="_blank" href="https://icon-sets.iconify.design">Iconify icon</a>, requires being online if not in cache)
       label: Icon
       name: icon1
-      required: true
+      required: false
       type: TEXT
       groupName: untoggled
     - default: gray
@@ -44,11 +43,10 @@ props:
       required: false
       type: TEXT
       groupName: toggled
-    - default: lightbulb_fill
-      description: The <a class="external text-color-blue" target="_blank" href="https://framework7.io/icons/">Framework7 icon</a> of the toggled button
+    - description: Use <code>oh:iconName</code> (<a class="external text-color-blue" target="_blank" href="https://www.openhab.org/link/icons">openHAB icon</a>), <code>f7:iconName</code> (<a class="external text-color-blue" target="_blank" href="https://framework7.io/icons/">Framework7 icon</a>), <code>material:iconName</code> (<a class="external text-color-blue" target="_blank" href="https://jossef.github.io/material-design-icons-iconfont/">Material icon</a>) or <code>iconify:iconSet:iconName</code> (<a class="external text-color-blue" target="_blank" href="https://icon-sets.iconify.design">Iconify icon</a>, requires being online if not in cache)
       label: Icon
       name: icon2
-      required: true
+      required: false
       type: TEXT
       groupName: toggled
     - default: linear-gradient(180deg, rgba(255,149,0,1) 0%, rgba(157,92,0,1) 100%)
@@ -67,46 +65,45 @@ props:
       type: TEXT
       groupName: toggled
       advanced: true
-    - default: "120"
-      description: The width of the switch in pixels (<code>px</code>)
+    - description: The width of the switch in pixels (<code>px</code>)
       label: Width
       name: cardwidth
       required: false
       type: INTEGER
-      advanced: true
       groupName: styling
+      advanced: true
     - default: "120"
       description: The height of the switch in pixels (<code>px</code>)
       label: Height
       name: cardheight
       required: false
       type: INTEGER
-      advanced: true
       groupName: styling
+      advanced: true
     - default: white
       description: The color of the text as <a class="external text-color-blue" target="_blank" href="https://www.w3schools.com/cssref/css_colors.asp">CSS Color</a>
       label: Text Color
       name: textcolor
       required: false
       type: TEXT
-      advanced: true
       groupName: styling
+      advanced: true
     - default: "14"
       description: The size of the text in pixels (<code>px</code>)
       label: Text Size
       name: textsize
       required: false
       type: INTEGER
-      advanced: true
       groupName: styling
+      advanced: true
     - default: "65"
       description: The size of the icon in pixels (<code>px</code>)
       label: Icon Size
       name: iconsize
       required: false
       type: INTEGER
-      advanced: true
       groupName: styling
+      advanced: true
   parameterGroups:
     - name: untoggled
       label: Untoggled (OFF)
@@ -114,7 +111,7 @@ props:
       label: Toggled (ON)
     - name: styling
       label: Styling
-timestamp: Jan 5, 2022, 3:18:07 PM
+timestamp: Jan 8, 2022, 10:08:28 PM
 component: f7-card
 config:
   style:
@@ -123,7 +120,7 @@ config:
     margin-left: auto;
     margin-right: auto;
     padding: 0px
-    width: =props.cardwidth + "px"
+    width: '=(props.cardwidth) ? props.cardwidth + "px" : ""'
 slots:
   default:
     - component: f7-block
@@ -145,13 +142,14 @@ slots:
                 font-weight: normal
                 padding: 3px
               text: '=(items[props.item].state === "OFF") ? ((props.text1) ? props.text1 : items[props.item].state) : ((props.text2) ? props.text2 : items[props.item].state)'
-          - component: f7-icon
+          - component: oh-icon
             config:
-              f7: '=(items[props.item].state === "OFF") ? props.icon1 : props.icon2'
-              size: =props.iconsize
+              icon: '=(items[props.item].state === "OFF") ? props.icon1 : props.icon2'
+              width: =props.iconsize
               style:
                 color: '=(items[props.item].state === "OFF") ? (props.iconcolor1 ? props.iconcolor1 : "white") : (props.iconcolor2 ? props.iconcolor2 : "white")'
                 padding: 3px
+                display: '=(props.icon1) ? "block" : "none"'
     - component: oh-link
       config:
         action: command

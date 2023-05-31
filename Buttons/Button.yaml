@@ -19,14 +19,12 @@ props:
       name: text
       required: false
       type: TEXT
-    - default: lightbulb
-      description: The <a class="external text-color-blue" target="_blank" href="https://framework7.io/icons/">Framework7 icon</a> of the button
+    - description: Use <code>oh:iconName</code> (<a class="external text-color-blue" target="_blank" href="https://www.openhab.org/link/icons">openHAB icon</a>), <code>f7:iconName</code> (<a class="external text-color-blue" target="_blank" href="https://framework7.io/icons/">Framework7 icon</a>), <code>material:iconName</code> (<a class="external text-color-blue" target="_blank" href="https://jossef.github.io/material-design-icons-iconfont/">Material icon</a>) or <code>iconify:iconSet:iconName</code> (<a class="external text-color-blue" target="_blank" href="https://icon-sets.iconify.design">Iconify icon</a>, requires being online if not in cache)
       label: Icon
       name: icon
-      required: true
+      required: false
       type: TEXT
-    - default: "120"
-      description: The width of the button in pixels (<code>px</code>)
+    - description: The width of the button in pixels (<code>px</code>)
       label: Width
       name: cardwidth
       required: false
@@ -84,7 +82,7 @@ props:
   parameterGroups:
     - name: styling
       label: Styling
-timestamp: Jan 5, 2022, 3:30:47 PM
+timestamp: Jan 8, 2022, 10:07:06 PM
 component: f7-card
 config:
   style:
@@ -93,7 +91,7 @@ config:
     margin-left: auto;
     margin-right: auto;
     padding: 0px
-    width: =props.cardwidth + "px"
+    width: '=(props.cardwidth) ? props.cardwidth + "px" : ""'
 slots:
   default:
     - component: f7-block
@@ -115,13 +113,14 @@ slots:
                 font-weight: normal
                 padding: 3px
               text: =props.text
-          - component: f7-icon
+          - component: oh-icon
             config:
-              f7: =props.icon
-              size: =props.iconsize
+              icon: =props.icon
+              width: =props.iconsize
               style:
                 color: =props.iconcolor
                 padding: 3px
+                display: '=(props.icon) ? "block" : "none"'
     - component: oh-link
       config:
         action: command
